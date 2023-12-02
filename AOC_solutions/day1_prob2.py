@@ -33,11 +33,13 @@ def calib_values2(file):
         calibration_digit1 = ""
         calibration_digit2 = ""
 
-        # finding the index position of numbers in str format.
+        # Finding the index position of numbers in str format.
         for number in number_names:
+            # If only one instance of num, add to lists.
             if line.count(number) == 1:
                 order.append(line.index(number))
                 num_values.append(number_names[number])
+            # If more than once instance of num, add to list values with all index positions.
             elif line.count(number) > 1:
                 for _ in range(line.count(number)):
                     if number in line and line.index(number) not in order:
@@ -49,17 +51,19 @@ def calib_values2(file):
                         num_values.append(number_names[number])
                         position_tracker_s = order[-1] + 1
 
-        # finding index position of numbers in int.
+        # Finding index position of numbers in int format.
         for char in line[:]:
+            # If only one instance of num, add to lists.
             if char.isdigit() and line.count(char) == 1:
                 order2.append(line.index(char))
                 num_values2.append(char)
+            # If more than once instance of num, add to list values with all index positions.
             elif char.isdigit() and line.count(char) > 1:
                 order2.append(line.index(char, position_tracker))
                 num_values2.append(char)
                 position_tracker = order2[-1] + 1
 
-        # comparing index positions of nums in strings or nums in int.
+        # Comparing index positions of nums in string format or nums in int format.
         final_order = order + order2
         final_num_values = num_values + num_values2
 
@@ -69,6 +73,7 @@ def calib_values2(file):
             elif p == max(final_order):
                 calibration_digit2 = v
 
+        # Final check to see if there are calibration values with only one digit.
         if calibration_digit1 and calibration_digit2:
             calib_values_list.append(calibration_digit1 + calibration_digit2)
         elif calibration_digit1 and not calibration_digit2:
@@ -78,6 +83,7 @@ def calib_values2(file):
 
     print(calib_values_list, len(calib_values_list))
 
+    # Summing calibration values.
     for value in calib_values_list:
         total += int(value)
 
