@@ -15,11 +15,6 @@ file_path = os.path.join(os.path.dirname(__file__), r"Inputs\prob2_input.txt")
 # List to store IDs of possible games.
 possible_games_IDs = []
 
-# Cubes.
-red_cubes = 12
-green_cubes = 13
-blue_cubes = 14
-
 
 # Creating function to extract amount of cubes per set in each game.
 def text_decoder(file):
